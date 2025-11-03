@@ -1,0 +1,92 @@
+[
+  {
+    "id": "t-orders-amount-0-exact",
+    "name": "orders-amount-0-exact",
+    "request": { "method": "POST", "path": "/orders", "headers": { "Content-Type": "application/json" }, "body": { "amount": 0, "currency": "USD", "items": [{ "sku": "S1", "qty": 1 }] } },
+    "tags": ["validation","amount","user_requested"],
+    "user_requested": true,
+    "run_mode": "auto",
+    "priority": "high"
+  },
+  {
+    "id": "t-orders-amount-0-string",
+    "name": "orders-amount-0-string",
+    "request": { "method": "POST", "path": "/orders", "headers": { "Content-Type": "application/json" }, "body": { "amount": "0", "currency": "USD", "items": [{ "sku": "S1", "qty": 1 }] } },
+    "tags": ["validation","amount","user_requested","type-variant"],
+    "user_requested": true,
+    "run_mode": "auto",
+    "priority": "high"
+  },
+  {
+    "id": "t-orders-amount-missing",
+    "name": "orders-amount-missing",
+    "request": { "method": "POST", "path": "/orders", "headers": { "Content-Type": "application/json" }, "body": { "currency": "USD", "items": [{ "sku": "S1", "qty": 1 }] } },
+    "tags": ["validation","amount","user_requested","missing-field"],
+    "user_requested": true,
+    "run_mode": "auto",
+    "priority": "high"
+  },
+  {
+    "id": "t-orders-truncated-json",
+    "name": "orders-truncated-json",
+    "request": { "method": "POST", "path": "/orders", "headers": { "Content-Type": "application/json" }, "body": "{ \"amount\": 100, \"items\": [ { \"sku\": \"S1\", \"qty\": 1 }" },
+    "tags": ["malformed","content-type"],
+    "user_requested": false,
+    "run_mode": "auto",
+    "priority": "high"
+  },
+  {
+    "id": "t-orders-currency-invalid",
+    "name": "orders-currency-invalid",
+    "request": { "method": "POST", "path": "/orders", "headers": { "Content-Type": "application/json" }, "body": { "amount": 0, "currency": "XYZ", "items": [{ "sku": "S1", "qty": 1 }] } },
+    "tags": ["validation","amount","combo"],
+    "user_requested": true,
+    "run_mode": "auto",
+    "priority": "high"
+  },
+  {
+    "id": "t-orders-items-empty",
+    "name": "orders-items-empty",
+    "request": { "method": "POST", "path": "/orders", "headers": { "Content-Type": "application/json" }, "body": { "amount": 50, "currency": "USD", "items": [] } },
+    "tags": ["validation","items"],
+    "user_requested": false,
+    "run_mode": "auto",
+    "priority": "medium"
+  },
+  {
+    "id": "t-users-missing-email",
+    "name": "users-missing-email",
+    "request": { "method": "POST", "path": "/users", "headers": { "Content-Type": "application/json" }, "body": { "name": "Bob" } },
+    "tags": ["validation","email","user_requested"],
+    "user_requested": true,
+    "run_mode": "auto",
+    "priority": "high"
+  },
+  {
+    "id": "t-users-duplicate-email-concurrent",
+    "name": "users-duplicate-email-concurrent",
+    "request": { "method": "POST", "path": "/users", "headers": { "Content-Type": "application/json" }, "body": { "email": "duplicate@example.com", "name": "Alice" } },
+    "tags": ["concurrency","duplicate","user_requested"],
+    "user_requested": true,
+    "run_mode": "manual",
+    "priority": "high"
+  },
+  {
+    "id": "t-orders-long-description",
+    "name": "orders-long-description",
+    "request": { "method": "POST", "path": "/orders", "headers": { "Content-Type": "application/json" }, "body": { "amount": 10, "currency": "USD", "description": "", "items": [{ "sku": "S1", "qty": 1 }] } },
+    "tags": ["fuzz","size"],
+    "user_requested": false,
+    "run_mode": "auto",
+    "priority": "low"
+  },
+  {
+    "id": "t-orders-promo-injection",
+    "name": "orders-promo-injection",
+    "request": { "method": "POST", "path": "/orders", "headers": { "Content-Type": "application/json" }, "body": { "amount": 100, "currency": "USD", "promo_code": "'; DROP TABLE users; --", "items": [{ "sku": "S1", "qty": 1 }] } },
+    "tags": ["injection","fuzz"],
+    "user_requested": false,
+    "run_mode": "auto",
+    "priority": "low"
+  }
+]

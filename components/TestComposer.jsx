@@ -50,13 +50,13 @@ export default function TestComposer({ requestConfig, onGenerate }) {
     <div className="composer-card">
       <h2>Test Composer (Natural Language)</h2>
       <p>
-        Enter a natural-language pointer (e.g., "ensure to test when amount is 0"). The demo will generate variations and mark pointer tests as
+        Enter a natural-language pointer (e.g., "ensure to test when amount is 0") for tests you want to ensure get generated. The system will generate a lot variations and your requested tests as
         user_requested.
       </p>
       <textarea 
         value={nl} 
         onChange={e => setNl(e.target.value)} 
-        placeholder="Type your test pointer here..." 
+        placeholder="Enter your important tests here..." 
         rows={6}
         disabled={loading}
       />

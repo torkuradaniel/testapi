@@ -10,7 +10,10 @@ body{ margin:0; font-family:"Open Sans", sans-serif; font-optical-sizing:auto; f
 .queue-header h2{ margin:0 }
 .composer-card{ display:flex; flex-direction:column; gap:12px; background:var(--card); padding:16px; border-radius:8px; box-sizing:border-box }
 .composer-card h2{ margin:0; font-size:18px }
-.composer-card p{ display:none }
+.composer-card p{ display:block;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.4; }
 .composer-card textarea{ width:100%; max-width:100%; box-sizing:border-box; padding:10px; border-radius:6px; border:1px solid rgba(255,255,255,0.1); background:#0b1220; color:#e6eef6; font-family:"Open Sans", sans-serif; font-size:14px; resize:vertical }
 .composer-card textarea:disabled{ opacity:0.6; cursor:not-allowed }
 .error-message{ padding:10px; background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); border-radius:6px; color:#fca5a5; font-size:14px }

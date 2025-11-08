@@ -9,10 +9,18 @@ import ResultsInspector from '../components/ResultsInspector';
 export default function Page() {
   const [requestConfig, setRequestConfig] = useState({
     method: 'POST',
-    baseUrl: 'https://staging.orders.api',
-    path: '/orders',
+    baseUrl: 'https://api-exchange-now-sandbox.vertofx.com',
+    path: '/fx/rate',
     headers: { 'Content-Type': 'application/json' },
-    body: { amount: 100, currency: 'USD', items: [{ sku: 'S1', qty: 1 }] }
+    body: {
+      "paymentMode": "immediate",
+      "currencyFrom": {
+        "currencyName": "NGN"
+      },
+      "currencyTo": {
+        "currencyName": "USD"
+      }
+    }
   });
   const [tests, setTests] = useState([]);
   const [results, setResults] = useState([]);
@@ -100,10 +108,11 @@ export default function Page() {
   return (
     <div className="app-root">
       <header className="app-header">
-        <h1>Automated API Testing — Phase 1</h1>
+        <h1>Test your API</h1>
+        <p>Enter your API request details below and test your API to ensure your API is working as expected and securely</p>
       </header>
 
-      <ApiRequestBuilder onRequestChange={setRequestConfig} />
+      <ApiRequestBuilder value={requestConfig} onRequestChange={setRequestConfig} />
 
       <section className="composer-section">
         <TestComposer requestConfig={requestConfig} onGenerate={addGeneratedTests} />

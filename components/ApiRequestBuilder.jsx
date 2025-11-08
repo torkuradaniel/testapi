@@ -1,20 +1,41 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-export default function ApiRequestBuilder({ onRequestChange }) {
+export default function ApiRequestBuilder({ value, onRequestChange }) {
   const [method, setMethod] = useState('POST');
-  const [baseUrl, setBaseUrl] = useState('https://staging.orders.api');
-  const [path, setPath] = useState('/orders');
+  const [baseUrl, setBaseUrl] = useState('https://api-exchange-now-sandbox.vertofx.com');
+  const [path, setPath] = useState('/fx/rate');
   const [pathParams, setPathParams] = useState('');
   const [authType, setAuthType] = useState('Bearer');
   const [authValue, setAuthValue] = useState('');
   const [queryParams, setQueryParams] = useState('');
   const [requestBody, setRequestBody] = useState(JSON.stringify({
-    amount: 100,
-    currency: 'USD',
-    items: [{ sku: 'S1', qty: 1 }]
-  }, null, 2));
+  "paymentMode": "immediate",
+  "currencyFrom": {
+    "currencyName": "NGN"
+  },
+  "currencyTo": {
+    "currencyName": "USD"
+  }
+}, null, 2));
+
+  // Sync local fields from parent value so updated defaults reflect automatically
+  useEffect(() => {
+    if (!value) return;
+    if (value.method && value.method !== method) setMethod(value.method);
+    if (typeof value.baseUrl === 'string' && value.baseUrl !== baseUrl) setBaseUrl(value.baseUrl);
+    if (typeof value.path === 'string' && value.path !== path) setPath(value.path);
+    // Body can be string (raw) or object (JSON)
+    if (Object.prototype.hasOwnProperty.call(value, 'body')) {
+      const nextBody = typeof value.body === 'string' ? value.body : JSON.stringify(value.body ?? null, null, 2);
+      if (nextBody !== requestBody) setRequestBody(nextBody);
+    }
+    // Clear per-request helpers on parent change
+    if (pathParams !== '') setPathParams('');
+    if (queryParams !== '') setQueryParams('');
+    // Auth header may be embedded in value.headers; do not auto-overwrite authValue unless needed
+  }, [value]);
 
   const handleUpdate = () => {
     const headers = {

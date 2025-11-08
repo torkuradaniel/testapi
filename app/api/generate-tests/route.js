@@ -30,7 +30,7 @@ API Request Configuration:
 
 Generate ${count} test cases that:
 1. The first 3 tests MUST directly satisfy the user's pointer: "${pointer}"
-2. Include edge cases, boundary conditions, type variations, missing fields, malformed data
+2. Include edge cases, boundary conditions, type variations, missing fields, malformed data, no validation
 3. Test for common vulnerabilities (injection, overflow, etc.)
 4. Each test should have a descriptive name
 

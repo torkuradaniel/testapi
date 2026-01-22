@@ -2,12 +2,29 @@
   "name": "api-test-phase1-ui",
   "version": "0.2.0",
   "private": true,
+  "description": "Problem (short): teams waste time finding gaps in APIs because writing exhaustive tests is slow and error-prone; NL test intents are underspecified and developers miss edge-cases. Solution (short): provide a tool that turns short natural-language pointers into broad, prioritized request-variation test suites, runs those tests (auto/manual), and surfaces all non-2xx results with the exact request that triggered them — so teams discover issues fast without writing dozens of hand-crafted tests.",
+  "homepage": "https://github.com/torkuradaniel/testapi#readme",
+  "bugs": {
+    "url": "https://github.com/torkuradaniel/testapi/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/torkuradaniel/testapi.git"
+  },
+  "license": "ISC",
+  "author": "torkura",
+  "type": "commonjs",
+  "main": "next.config.js",
+  "directories": {
+    "lib": "lib"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "@openai/codex": "^0.85.0",
     "next": "14.2.4",
     "openai": "^6.7.0",
     "react": "18.2.0",

@@ -13,7 +13,6 @@
   },
   "license": "ISC",
   "author": "torkura",
-  "type": "commonjs",
   "main": "next.config.js",
   "directories": {
     "lib": "lib"

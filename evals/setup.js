@@ -7,7 +7,7 @@ import { beforeAll, afterAll, vi } from 'vitest';
 
 // Mock environment variables for testing
 beforeAll(() => {
-  process.env.OPENAI_API_KEY = 'ss';
+  process.env.OPENAI_API_KEY = '';
 });
 
 afterAll(() => {

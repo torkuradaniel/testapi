@@ -20,7 +20,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "eval": "vitest run --config evals/vitest.config.js evals/suites/quality evals/suites/correctness",
+    "eval:watch": "vitest --config evals/vitest.config.js",
+    "eval:quality": "vitest run --config evals/vitest.config.js evals/suites/quality",
+    "eval:correctness": "vitest run --config evals/vitest.config.js evals/suites/correctness",
+    "eval:live": "vitest run --config evals/vitest.config.js evals/suites/live/model-quality.eval.js",
+    "eval:compare": "vitest run --config evals/vitest.config.js evals/suites/live/model-comparison.eval.js",
+    "eval:all": "vitest run --config evals/vitest.config.js"
   },
   "dependencies": {
     "@openai/codex": "^0.85.0",
@@ -29,5 +36,9 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "uuid": "9.0.0"
+  },
+  "devDependencies": {
+    "vitest": "^4.0.17",
+    "zod": "^4.3.5"
   }
 }

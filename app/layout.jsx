@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Automated API Testing — Phase 1',
-  description: 'Phase 1 client-side UI demo using Next.js',
+  title: 'Automated API Tests',
+  description: 'Test your APIs in jiffy',
 };
 
 import './globals.css';

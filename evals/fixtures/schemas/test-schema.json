@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated Test Schema",
+  "description": "Schema for validating generated API test objects",
+  "type": "object",
+  "required": ["id", "name", "request", "tags", "priority", "run_mode"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the test"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Descriptive name of the test"
+    },
+    "request": {
+      "type": "object",
+      "required": ["method", "path"],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["GET", "POST", "PUT", "PATCH", "DELETE"],
+          "description": "HTTP method"
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^/",
+          "description": "Request path starting with /"
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "description": "HTTP headers"
+        },
+        "body": {
+          "description": "Request body (any JSON-serializable value)"
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Tags for categorizing the test"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["high", "medium", "low"],
+      "description": "Test priority level"
+    },
+    "run_mode": {
+      "type": "string",
+      "enum": ["auto", "manual"],
+      "description": "Whether test runs automatically or requires manual trigger"
+    },
+    "user_requested": {
+      "type": "boolean",
+      "description": "Whether this test directly addresses user's pointer"
+    }
+  },
+  "additionalProperties": false
+}

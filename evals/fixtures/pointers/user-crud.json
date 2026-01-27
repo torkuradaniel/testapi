@@ -1,0 +1,26 @@
+{
+  "pointer": "test user creation with invalid email formats",
+  "requestConfig": {
+    "method": "POST",
+    "baseUrl": "https://api.example.com",
+    "path": "/users",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "email": "user@example.com",
+      "name": "Test User",
+      "password": "SecurePass123"
+    }
+  },
+  "expectedKeywords": ["email", "invalid", "format"],
+  "expectedEdgeCases": [
+    "missing @ symbol",
+    "missing domain",
+    "special characters",
+    "unicode characters",
+    "very long email",
+    "empty email"
+  ],
+  "count": 12
+}

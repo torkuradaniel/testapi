@@ -1,0 +1,42 @@
+{
+  "pointer": "test edge cases for currency conversion",
+  "requestConfig": {
+    "method": "POST",
+    "baseUrl": "https://api-exchange-now-sandbox.vertofx.com",
+    "path": "/fx/rate",
+    "headers": {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer {{AUTH_TOKEN}}"
+    },
+    "body": {
+      "paymentMode": "immediate",
+      "currencyFrom": {
+        "currencyName": "USD"
+      },
+      "currencyTo": {
+        "currencyName": "EUR"
+      }
+    }
+  },
+  "auth": {
+    "endpoint": "https://api-v3-sandbox.vertofx.com/users/login",
+    "method": "POST",
+    "body": {
+      "clientId": "{{CLIENT_ID}}",
+      "apiKey": "{{API_KEY}}",
+      "mode": "apiKey"
+    }
+  },
+  "expectedKeywords": ["edge", "cases", "currency", "conversion"],
+  "expectedEdgeCases": [
+    "same currency (currencyFrom equals currencyTo)",
+    "invalid currency code",
+    "missing currencyFrom",
+    "missing currencyTo",
+    "invalid paymentMode",
+    "empty currencyName",
+    "unsupported currency pair"
+  ],
+  "count": 15
+}

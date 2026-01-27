@@ -1,0 +1,31 @@
+# Eval Report
+Model,gpt-4o-mini
+Timestamp,2026-01-25T15:53:57.975Z
+Tests Generated,9
+
+# Scores
+Metric,Value,Threshold,Status
+Structure Valid,true,true,PASS
+Coverage Score,50.0%,30%,PASS
+Intent Score,100.0%,50%,PASS
+Golden Similarity,77.8%,30%,PASS
+Golden Category Coverage,5.9%,30%,FAIL
+
+# API Metrics
+Metric,Value
+Latency (ms),17746
+Total Tokens,1595
+Prompt Tokens,468
+Completion Tokens,1127
+
+# Generated Tests
+ID,Name,Priority,Run Mode,User Requested,Tags
+07a5ed4e-2530-4b3f-a748-77c7774b14ea,"Test with amount set to 0",high,auto,true,"amount-zero;payment"
+1734eaba-98fc-4980-99e7-474e46c51e48,"Test with amount set to 0 and missing description",high,auto,true,"amount-zero;missing-field"
+97ea5de1-bfb8-4c98-a44c-dac61edda9e7,"Test with amount set to 0 and invalid currency",high,auto,true,"amount-zero;invalid-currency"
+4f611812-757e-4a40-9b43-eed53bd80bbe,"Test with negative amount",medium,auto,false,"negative-amount"
+e8f236d1-e133-4217-841c-d1caaa13604e,"Test with excessively large amount",medium,auto,false,"large-amount"
+4018948d-0e9f-4d41-bee8-33725fcd0468,"Test missing Content-Type header",low,auto,false,"missing-header"
+3fd5f1b6-8954-43f0-8fee-90ed9dd6a480,"Test with invalid JSON format",low,auto,false,"invalid-json"
+89feabbc-6d24-419c-8fdc-f2432baad85e,"Test SQL injection in description",high,auto,false,"sql-injection"
+6edaeae7-faa6-4ba2-ae42-5baf35b045bf,"Test XSS injection in description",high,auto,false,"xss-injection"

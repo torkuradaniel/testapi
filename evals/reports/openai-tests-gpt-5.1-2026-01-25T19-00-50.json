@@ -1,0 +1,616 @@
+{
+  "model": "gpt-5.1",
+  "generatedAt": "2026-01-25T19:00:50.436Z",
+  "suites": [
+    {
+      "name": "payment",
+      "pointer": "ensure to test when amount is 0",
+      "requestConfig": {
+        "method": "POST",
+        "baseUrl": "https://api.example.com",
+        "path": "/payments",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer test-token"
+        },
+        "body": {
+          "amount": 100,
+          "currency": "USD",
+          "description": "Test payment"
+        }
+      },
+      "requestedCount": 10,
+      "tests": [
+        {
+          "name": "amount-zero-basic-valid-payment",
+          "request": {
+            "method": "POST",
+            "path": "/payments",
+            "headers": {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer test-token"
+            },
+            "body": {
+              "amount": 0,
+              "currency": "USD",
+              "description": "Zero amount payment"
+            }
+          },
+          "tags": [
+            "amount-0",
+            "boundary",
+            "validation"
+          ],
+          "user_requested": true,
+          "run_mode": "auto",
+          "priority": "high",
+          "id": "7fd32a94-6e5e-42f7-bd43-8a3370ebc0f3"
+        },
+        {
+          "name": "amount-zero-with-different-currency",
+          "request": {
+            "method": "POST",
+            "path": "/payments",
+            "headers": {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer test-token"
+            },
+            "body": {
+              "amount": 0,
+              "currency": "EUR",
+              "description": "Zero amount payment in EUR"
+            }
+          },
+          "tags": [
+            "amount-0",
+            "currency-variation",
+            "boundary"
+          ],
+          "user_requested": true,
+          "run_mode": "auto",
+          "priority": "high",
+          "id": "3a0e9ddb-3c2d-4d07-9712-a083770655a4"
+        },
+        {
+          "name": "amount-zero-without-description",
+          "request": {
+            "method": "POST",
+            "path": "/payments",
+            "headers": {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer test-token"
+            },
+            "body": {
+              "amount": 0,
+              "currency": "USD"
+            }
+          },
+          "tags": [
+            "amount-0",
+            "missing-optional-field",
+            "boundary"
+          ],
+          "user_requested": true,
+          "run_mode": "auto",
+          "priority": "high",
+          "id": "fb47fd13-53f9-4ef9-9e79-4e2fdacae146"
+        },
+        {
+          "name": "amount-negative-boundary-condition",
+          "request": {
+            "method": "POST",
+            "path": "/payments",
+            "headers": {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer test-token"
+            },
+            "body": {
+              "amount": -1,
+              "currency": "USD",
+              "description": "Negative amount payment"
+            }
+          },
+          "tags": [
+            "amount-negative",
+            "boundary",
+            "validation"
+          ],
+          "user_requested": false,
+          "run_mode": "auto",
+          "priority": "high",
+          "id": "84c2aed0-d141-435b-873b-dbd0a68f33a7"
+        },
+        {
+          "name": "amount-large-integer-overflow-test",
+          "request": {
+            "method": "POST",
+            "path": "/payments",
+            "headers": {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer test-token"
+            },
+            "body": {
+              "amount": 9223372036854776000,
+              "currency": "USD",
+              "description": "Max 64-bit integer amount"
+            }
+          },
+          "tags": [
+            "overflow",
+            "large-amount",
+            "security"
+          ],
+          "user_requested": false,
+          "run_mode": "auto",
+          "priority": "high",
+          "id": "878e0ed9-815c-47c0-9b72-2263b8230494"
+        },
+        {
+          "name": "amount-as-string-type-variation",
+          "request": {
+            "method": "POST",
+            "path": "/payments",
+            "headers": {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer test-token"
+            },
+            "body": {
+              "amount": "100",
+              "currency": "USD",
+              "description": "Amount as string"
+            }
+          },
+          "tags": [
+            "type-variation",
+            "amount-string",
+            "validation"
+          ],
+          "user_requested": false,
+          "run_mode": "auto",
+          "priority": "medium",
+          "id": "1939fde5-b128-41dd-bee2-fe1fd9969931"
+        },
+        {
+          "name": "missing-amount-field-no-validation-check",
+          "request": {
+            "method": "POST",
+            "path": "/payments",
+            "headers": {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer test-token"
+            },
+            "body": {
+              "currency": "USD",
+              "description": "Payment without amount"
+            }
+          },
+          "tags": [
+            "missing-field",
+            "no-amount",
+            "validation"
+          ],
+          "user_requested": false,
+          "run_mode": "auto",
+          "priority": "high",
+          "id": "58effb53-833d-447a-acf1-64f20627e93c"
+        },
+        {
+          "name": "sql-injection-in-description-field",
+          "request": {
+            "method": "POST",
+            "path": "/payments",
+            "headers": {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer test-token"
+            },
+            "body": {
+              "amount": 100,
+              "currency": "USD",
+              "description": "Test'); DROP TABLE payments; --"
+            }
+          },
+          "tags": [
+            "injection",
+            "sql-injection",
+            "security"
+          ],
+          "user_requested": false,
+          "run_mode": "auto",
+          "priority": "high",
+          "id": "1882cc0e-cda8-4517-b62b-61bf80494024"
+        },
+        {
+          "name": "invalid-json-body-missing-closing-brace",
+          "request": {
+            "method": "POST",
+            "path": "/payments",
+            "headers": {
+              "Content-Type": "text/plain",
+              "Authorization": "Bearer test-token"
+            },
+            "body": "{ \"amount\": 100, \"currency\": \"USD\", \"description\": \"Malformed JSON\""
+          },
+          "tags": [
+            "invalid-json",
+            "malformed-body",
+            "parser-robustness"
+          ],
+          "user_requested": false,
+          "run_mode": "auto",
+          "priority": "medium",
+          "id": "cce523ba-62c7-479b-b064-b224f7e15c6f"
+        },
+        {
+          "name": "xss-payload-in-description-field",
+          "request": {
+            "method": "POST",
+            "path": "/payments",
+            "headers": {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer test-token"
+            },
+            "body": {
+              "amount": 100,
+              "currency": "USD",
+              "description": "<script>alert('xss')</script>"
+            }
+          },
+          "tags": [
+            "xss",
+            "injection",
+            "security"
+          ],
+          "user_requested": false,
+          "run_mode": "auto",
+          "priority": "high",
+          "id": "c78234f3-9667-4cf3-aee4-a71dcc69df96"
+        }
+      ],
+      "metrics": {
+        "latencyMs": 18383,
+        "usage": {
+          "prompt_tokens": 467,
+          "completion_tokens": 1322,
+          "total_tokens": 1789,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "user-crud",
+      "pointer": "test user creation with invalid email formats",
+      "requestConfig": {
+        "method": "POST",
+        "baseUrl": "https://api.example.com",
+        "path": "/users",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "email": "user@example.com",
+          "name": "Test User",
+          "password": "SecurePass123"
+        }
+      },
+      "requestedCount": 12,
+      "tests": [
+        {
+          "name": "invalid-email-missing-at-symbol",
+          "request": {
+            "method": "POST",
+            "path": "/users",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "email": "userexample.com",
+              "name": "Test User",
+              "password": "SecurePass123"
+            }
+          },
+          "tags": [
+            "user-creation",
+            "invalid-email",
+            "validation"
+          ],
+          "user_requested": true,
+          "run_mode": "auto",
+          "priority": "high",
+          "id": "004f923a-e46a-480e-bf65-c0a2b3809ea2"
+        },
+        {
+          "name": "invalid-email-multiple-at-symbols",
+          "request": {
+            "method": "POST",
+            "path": "/users",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "email": "user@@example.com",
+              "name": "Test User",
+              "password": "SecurePass123"
+            }
+          },
+          "tags": [
+            "user-creation",
+            "invalid-email",
+            "validation"
+          ],
+          "user_requested": true,
+          "run_mode": "auto",
+          "priority": "high",
+          "id": "dac65920-21d2-486b-9b72-d45170bbbc27"
+        },
+        {
+          "name": "invalid-email-missing-domain-tld",
+          "request": {
+            "method": "POST",
+            "path": "/users",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "email": "user@example",
+              "name": "Test User",
+              "password": "SecurePass123"
+            }
+          },
+          "tags": [
+            "user-creation",
+            "invalid-email",
+            "validation"
+          ],
+          "user_requested": true,
+          "run_mode": "auto",
+          "priority": "high",
+          "id": "2cc3bca8-277a-4cfa-b156-aab34804b602"
+        },
+        {
+          "name": "invalid-email-with-script-injection",
+          "request": {
+            "method": "POST",
+            "path": "/users",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "email": "user<script>alert(1)</script>@example.com",
+              "name": "Test User",
+              "password": "SecurePass123"
+            }
+          },
+          "tags": [
+            "user-creation",
+            "invalid-email",
+            "xss",
+            "security"
+          ],
+          "user_requested": false,
+          "run_mode": "auto",
+          "priority": "high",
+          "id": "1d7f45ee-89b0-44fc-9f62-5184eec904a9"
+        },
+        {
+          "name": "invalid-email-sql-injection-pattern",
+          "request": {
+            "method": "POST",
+            "path": "/users",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "email": "user@example.com' OR '1'='1",
+              "name": "Test User",
+              "password": "SecurePass123"
+            }
+          },
+          "tags": [
+            "user-creation",
+            "invalid-email",
+            "sql-injection",
+            "security"
+          ],
+          "user_requested": false,
+          "run_mode": "auto",
+          "priority": "high",
+          "id": "aa147414-8cff-49a1-9c95-6ebb56e02ec6"
+        },
+        {
+          "name": "email-field-as-number-type-instead-of-string",
+          "request": {
+            "method": "POST",
+            "path": "/users",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "email": 12345,
+              "name": "Test User",
+              "password": "SecurePass123"
+            }
+          },
+          "tags": [
+            "user-creation",
+            "type-violation",
+            "invalid-email"
+          ],
+          "user_requested": false,
+          "run_mode": "auto",
+          "priority": "medium",
+          "id": "4e53cf78-6003-4d90-95b3-e8cc01990f9f"
+        },
+        {
+          "name": "missing-email-field-entirely",
+          "request": {
+            "method": "POST",
+            "path": "/users",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "name": "Test User",
+              "password": "SecurePass123"
+            }
+          },
+          "tags": [
+            "user-creation",
+            "missing-field",
+            "validation"
+          ],
+          "user_requested": false,
+          "run_mode": "auto",
+          "priority": "high",
+          "id": "54d5d1d5-85b9-4da0-926c-72224e8ea953"
+        },
+        {
+          "name": "empty-email-string-boundary-condition",
+          "request": {
+            "method": "POST",
+            "path": "/users",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "email": "",
+              "name": "Test User",
+              "password": "SecurePass123"
+            }
+          },
+          "tags": [
+            "user-creation",
+            "invalid-email",
+            "boundary"
+          ],
+          "user_requested": false,
+          "run_mode": "auto",
+          "priority": "medium",
+          "id": "38b7e77d-3f09-4b29-a7be-5d9fcd4ad121"
+        },
+        {
+          "name": "overly-long-email-local-part-overflow-test",
+          "request": {
+            "method": "POST",
+            "path": "/users",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "email": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@example.com",
+              "name": "Test User",
+              "password": "SecurePass123"
+            }
+          },
+          "tags": [
+            "user-creation",
+            "invalid-email",
+            "overflow",
+            "boundary"
+          ],
+          "user_requested": false,
+          "run_mode": "auto",
+          "priority": "medium",
+          "id": "b018546b-342b-4622-ad63-315066c6b2dd"
+        },
+        {
+          "name": "invalid-json-body-missing-closing-brace",
+          "request": {
+            "method": "POST",
+            "path": "/users",
+            "headers": {
+              "Content-Type": "text/plain"
+            },
+            "body": "{ \"email\": \"user@example.com\", \"name\": \"Test User\", \"password\": \"SecurePass123\""
+          },
+          "tags": [
+            "user-creation",
+            "invalid-json",
+            "parser-robustness"
+          ],
+          "user_requested": false,
+          "run_mode": "auto",
+          "priority": "medium",
+          "id": "63fb7cfc-5225-415b-ad0e-7f7aaec3200f"
+        },
+        {
+          "name": "email-field-null-with-valid-other-fields",
+          "request": {
+            "method": "POST",
+            "path": "/users",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "email": null,
+              "name": "Test User",
+              "password": "SecurePass123"
+            }
+          },
+          "tags": [
+            "user-creation",
+            "null-value",
+            "invalid-email"
+          ],
+          "user_requested": false,
+          "run_mode": "auto",
+          "priority": "medium",
+          "id": "b794ce6a-31af-42f2-aadc-c5bcf6429cae"
+        },
+        {
+          "name": "no-validation-raw-body-without-email-field-and-extra-keys",
+          "request": {
+            "method": "POST",
+            "path": "/users",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "username": "testuser",
+              "name": "Test User",
+              "password": "SecurePass123",
+              "role": "admin",
+              "debug": true
+            }
+          },
+          "tags": [
+            "user-creation",
+            "no-validation",
+            "extra-fields",
+            "security"
+          ],
+          "user_requested": false,
+          "run_mode": "manual",
+          "priority": "low",
+          "id": "1fd55ba2-7b1c-4239-a206-8bcecae21c64"
+        }
+      ],
+      "metrics": {
+        "latencyMs": 21918,
+        "usage": {
+          "prompt_tokens": 459,
+          "completion_tokens": 1578,
+          "total_tokens": 2037,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      }
+    }
+  ]
+}

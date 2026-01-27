@@ -1,0 +1,32 @@
+# Eval Report
+Model,gpt-5.1
+Timestamp,2026-01-25T19:00:50.436Z
+Tests Generated,10
+
+# Scores
+Metric,Value,Threshold,Status
+Structure Valid,true,true,PASS
+Coverage Score,50.0%,30%,PASS
+Intent Score,100.0%,50%,PASS
+Golden Similarity,83.3%,30%,PASS
+Golden Category Coverage,41.2%,30%,PASS
+
+# API Metrics
+Metric,Value
+Latency (ms),18383
+Total Tokens,1789
+Prompt Tokens,467
+Completion Tokens,1322
+
+# Generated Tests
+ID,Name,Priority,Run Mode,User Requested,Tags
+7fd32a94-6e5e-42f7-bd43-8a3370ebc0f3,"amount-zero-basic-valid-payment",high,auto,true,"amount-0;boundary;validation"
+3a0e9ddb-3c2d-4d07-9712-a083770655a4,"amount-zero-with-different-currency",high,auto,true,"amount-0;currency-variation;boundary"
+fb47fd13-53f9-4ef9-9e79-4e2fdacae146,"amount-zero-without-description",high,auto,true,"amount-0;missing-optional-field;boundary"
+84c2aed0-d141-435b-873b-dbd0a68f33a7,"amount-negative-boundary-condition",high,auto,false,"amount-negative;boundary;validation"
+878e0ed9-815c-47c0-9b72-2263b8230494,"amount-large-integer-overflow-test",high,auto,false,"overflow;large-amount;security"
+1939fde5-b128-41dd-bee2-fe1fd9969931,"amount-as-string-type-variation",medium,auto,false,"type-variation;amount-string;validation"
+58effb53-833d-447a-acf1-64f20627e93c,"missing-amount-field-no-validation-check",high,auto,false,"missing-field;no-amount;validation"
+1882cc0e-cda8-4517-b62b-61bf80494024,"sql-injection-in-description-field",high,auto,false,"injection;sql-injection;security"
+cce523ba-62c7-479b-b064-b224f7e15c6f,"invalid-json-body-missing-closing-brace",medium,auto,false,"invalid-json;malformed-body;parser-robustness"
+c78234f3-9667-4cf3-aee4-a71dcc69df96,"xss-payload-in-description-field",high,auto,false,"xss;injection;security"

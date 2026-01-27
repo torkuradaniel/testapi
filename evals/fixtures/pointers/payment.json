@@ -1,0 +1,26 @@
+{
+  "pointer": "ensure to test when amount is 0",
+  "requestConfig": {
+    "method": "POST",
+    "baseUrl": "https://api.example.com",
+    "path": "/payments",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer test-token"
+    },
+    "body": {
+      "amount": 100,
+      "currency": "USD",
+      "description": "Test payment"
+    }
+  },
+  "expectedKeywords": ["amount", "0", "zero"],
+  "expectedEdgeCases": [
+    "zero amount",
+    "negative amount",
+    "decimal amount",
+    "max amount",
+    "missing amount"
+  ],
+  "count": 10
+}

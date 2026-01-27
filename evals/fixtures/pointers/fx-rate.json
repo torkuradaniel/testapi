@@ -1,0 +1,47 @@
+{
+  "pointer": "test when currencyFrom equals currencyTo (same currency)",
+  "requestConfig": {
+    "method": "POST",
+    "baseUrl": "https://api-exchange-now-sandbox.vertofx.com",
+    "path": "/fx/rate",
+    "headers": {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer {{AUTH_TOKEN}}"
+    },
+    "body": {
+      "paymentMode": "immediate",
+      "currencyFrom": {
+        "currencyName": "AED"
+      },
+      "currencyTo": {
+        "currencyName": "USD"
+      }
+    }
+  },
+  "auth": {
+    "endpoint": "https://api-v3-sandbox.vertofx.com/users/login",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    "body": {
+      "clientId": "{{CLIENT_ID}}",
+      "apiKey": "{{API_KEY}}",
+      "mode": "apiKey"
+    }
+  },
+  "expectedKeywords": ["currencyFrom", "currencyTo", "same", "currency"],
+  "expectedEdgeCases": [
+    "same currency (AED to AED)",
+    "invalid currencyName",
+    "empty currencyName",
+    "missing currencyFrom object",
+    "missing currencyTo object",
+    "null currencyName",
+    "invalid paymentMode value",
+    "missing paymentMode"
+  ],
+  "count": 10
+}

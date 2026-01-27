@@ -1,0 +1,32 @@
+# Eval Report
+Model,gpt-4o-mini
+Timestamp,2026-01-25T16:09:30.567Z
+Tests Generated,10
+
+# Scores
+Metric,Value,Threshold,Status
+Structure Valid,true,true,PASS
+Coverage Score,66.7%,30%,PASS
+Intent Score,100.0%,50%,PASS
+Golden Similarity,81.7%,30%,PASS
+Golden Category Coverage,41.2%,30%,PASS
+
+# API Metrics
+Metric,Value
+Latency (ms),25994
+Total Tokens,1726
+Prompt Tokens,468
+Completion Tokens,1258
+
+# Generated Tests
+ID,Name,Priority,Run Mode,User Requested,Tags
+3f3474bb-7e2d-40c7-a3af-3775b46a48dc,"Test payment with amount as 0",high,auto,true,"amount;zero"
+88910aed-6353-4a1e-a9a2-ec2a82b897bb,"Test payment with negative amount",high,auto,true,"amount;negative"
+3c86fa4e-7e0a-4862-ad39-7c3884c3a920,"Test payment with zero and large description",high,auto,true,"amount;edge"
+2962b8cb-7596-44ca-a9c4-91667d93358c,"Test payment with missing currency field",medium,auto,false,"missing;currency"
+ba115c98-853f-46da-8bbf-5e7c6a29c7ed,"Test payment with malformed JSON body",low,manual,false,"malformed;json"
+90521535-5703-47b0-86e7-07789f9f0fdd,"Test payment with excessive amount",medium,auto,false,"amount;overflow"
+42c265f6-ad50-4d10-ac34-bcf5ff670d04,"Test payment with SQL injection in description",high,auto,false,"injection;sql"
+4b01f2ee-7da3-4369-8253-11869366ea09,"Test payment with invalid currency code",medium,auto,false,"currency;invalid"
+ae3fc275-b5db-444e-a952-916138bf857f,"Test payment with valid amount and empty description",low,auto,false,"description;empty"
+3ad59757-890b-4bec-9ff5-51b925419162,"Test payment with float amount",medium,auto,false,"amount;float"
